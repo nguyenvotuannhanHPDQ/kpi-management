@@ -5,57 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard KPI</title>
 
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
         .chart-container {
-            min-height: 350px;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-        .legend-color {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            margin-right: 6px;
+            height: 400px;
         }
     </style>
 </head>
-<body class="bg-light">
-
+<body>
 <div class="container py-4">
-    <h3 class="fw-bold text-primary mb-4">Dashboard Tiến độ KPI</h3>
+
+    <h2 class="mb-4 text-primary">Dashboard KPI</h2>
 
     <div class="row g-4">
         <div class="col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-white fw-semibold">Phân bố trạng thái công việc</div>
-                <div class="card-body chart-container">
+            <div class="card p-3">
+                <h5 class="card-title text-center">Số lượng công việc theo trạng thái</h5>
+                <div class="chart-container">
                     <canvas id="barChart"></canvas>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-header bg-white fw-semibold">Tỉ lệ % theo trạng thái</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-7">
-                            <canvas id="pieChart"></canvas>
-                        </div>
-                        <div class="col-5 d-flex flex-column justify-content-center">
-                            <div id="legendList"></div>
-                        </div>
-                    </div>
+            <div class="card p-3">
+                <h5 class="card-title text-center">Tỷ lệ trạng thái công việc</h5>
+                <div class="chart-container">
+                    <canvas id="pieChart"></canvas>
                 </div>
             </div>
         </div>
@@ -65,67 +49,73 @@
 
 <script>
     // data
-    const labels = [
-        "Chưa thực hiện",
-        "Đang thực hiện",
-        "Hoàn thành",
-        "Chờ phối hợp",
-        "Không áp dụng"
-    ];
+    const labels = ['Chưa thực hiện', 'Đang thực hiện', 'Hoàn thành', 'Chờ phối hợp', 'Không áp dụng'];
+    const dataCounts = [12, 18, 30, 5, 2];
+    const colors = ['#FF6384', '#36A2EB', '#4BC0C0', '#FFCE56', '#9966FF'];
+    const weights = [10, 20, 40, 15, 15];
 
-    const dataValues = [10, 25, 40, 15, 10];
-    const colors = ["#6c757d", "#0d6efd", "#198754", "#ffc107", "#dc3545"];
-
-    new Chart(document.getElementById("barChart"), {
-        type: "bar",
+    const ctxBar = document.getElementById('barChart').getContext('2d');
+    new Chart(ctxBar, {
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [{
-                label: "Số lượng công việc",
-                data: dataValues,
-                backgroundColor: colors
+                label: 'Số lượng',
+                data: dataCounts,
+                backgroundColor: colors,
+                borderRadius: 5
             }]
         },
         options: {
             indexAxis: 'y',
             responsive: true,
             plugins: {
-                legend: { display: false }
+                legend: { display: false },
+                title: {
+                    display: false
+                }
             },
             scales: {
-                x: { beginAtZero: true }
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision:0
+                    }
+                }
             }
         }
     });
 
-    const pieChart = new Chart(document.getElementById("pieChart"), {
-        type: "pie",
+    const ctxPie = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
         data: {
-            labels: labels,
+            labels: labels.map((l,i) => `${l} (${weights[i]}%)`),
             datasets: [{
-                data: dataValues,
-                backgroundColor: colors
+                data: dataCounts,
+                backgroundColor: colors,
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
             plugins: {
-                legend: { display: false }
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const index = context.dataIndex;
+                            const label = context.label.split(' ')[0];
+                            const value = context.dataset.data[index];
+                            const weight = weights[index];
+                            return `${label}: ${value} (Trọng số: ${weight}%)`;
+                        }
+                    }
+                }
             }
         }
-    });
-
-    const total = dataValues.reduce((sum, val) => sum + val, 0);
-    const legendContainer = document.getElementById("legendList");
-
-    labels.forEach((label, i) => {
-        const percent = ((dataValues[i] / total) * 100).toFixed(1);
-        legendContainer.innerHTML += `
-            <div class="legend-item">
-                <div class="legend-color" style="background:${colors[i]}"></div>
-                ${label}: <strong>${percent}%</strong>
-            </div>
-        `;
     });
 </script>
 
