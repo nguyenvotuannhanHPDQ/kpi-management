@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bảng mô tả KPI</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        th, td {
+            vertical-align: middle;
+        }
+        .kpi-group {
+            background-color: #f1f3f5;
+            font-weight: bold;
+        }
+        .table tbody tr td:first-child {
+            min-width: 250px;
+        }
+        .table tbody tr td {
+            min-width: 120px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+<div class="container py-4">
+    <h3 class="fw-bold mb-3 text-primary">Bảng mô tả KPI</h3>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Tên KPI</th>
+                    <th>Mã KPI</th>
+                    <th>Mô tả</th>
+                    <th>Điểm</th>
+                    <th>Trọng số</th>
+                    <th>Phương pháp đo</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <!-- S1 -->
+            <tr class="kpi-group">
+                <td colspan="6">S1: Tiến độ công việc</td>
+            </tr>
+            <tr>
+                <td>Hoàn thành trước thời gian</td>
+                <td>S1-T1</td>
+                <td>Hoàn thiện sớm so với kế hoạch > 1 ngày</td>
+                <td>5</td>
+                <td>25%</td>
+                <td>Xác định thời gian bắt đầu - thời gian hoàn thiện</td>
+            </tr>
+            <tr>
+                <td>Trễ hạn ít (1 - 2 ngày)</td>
+                <td>S1-T2</td>
+                <td>Trễ nhẹ</td>
+                <td>-2</td>
+                <td>25%</td>
+                <td>Xác định thời gian bắt đầu - thời gian hoàn thiện</td>
+            </tr>
+            <tr>
+                <td>Trễ hạn nhiều (&gt; 2 ngày)</td>
+                <td>S1-T3</td>
+                <td>Trễ nặng</td>
+                <td>-10</td>
+                <td>25%</td>
+                <td>Xác định thời gian bắt đầu - thời gian hoàn thiện</td>
+            </tr>
+            <tr>
+                <td>Không hoàn thành</td>
+                <td>S1-T4</td>
+                <td>Không thực hiện được, bỏ công việc</td>
+                <td>-15</td>
+                <td>25%</td>
+                <td>Chuyển đầu mục công việc cho người khác do không thực hiện</td>
+            </tr>
+
+            <!-- S2 -->
+            <tr class="kpi-group">
+                <td colspan="6">S2: Chất lượng công việc</td>
+            </tr>
+            <tr>
+                <td>Sản phẩm được đánh giá tốt</td>
+                <td>S2-C1</td>
+                <td>Được BP liên quan ghi nhận</td>
+                <td>5</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Sản phẩm vượt mức mong đợi</td>
+                <td>S2-C2</td>
+                <td>Tạo ấn tượng tốt, ghi nhận nhiều khen ngợi</td>
+                <td>10</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Sản phẩm lỗi/Bugs</td>
+                <td>S2-C3</td>
+                <td>Nhiều hơn 5 lỗi</td>
+                <td>-5</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Làm lại hoàn toàn</td>
+                <td>S2-C4</td>
+                <td>Gây ảnh hưởng đến tiến độ</td>
+                <td>-15</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+
+            <!-- S3 -->
+            <tr class="kpi-group">
+                <td colspan="6">S3: Tinh thần trách nhiệm</td>
+            </tr>
+            <tr>
+                <td>Sẵn sàng nhận việc khó</td>
+                <td>S3-T5</td>
+                <td>Chủ động nhận công việc khó, hỗ trợ anh em</td>
+                <td>2</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Chủ động tìm hiểu</td>
+                <td>S3-T6</td>
+                <td>Chủ động công việc, không đợi nhắc nhở</td>
+                <td>4</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Né tránh công việc</td>
+                <td>S3-T7</td>
+                <td>Né tránh công việc khó</td>
+                <td>-5</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Không báo cáo</td>
+                <td>S3-T8</td>
+                <td>Không phản hồi, không cập nhật</td>
+                <td>-10</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+
+            <!-- S4 -->
+            <tr class="kpi-group">
+                <td colspan="6">S4: Sáng tạo</td>
+            </tr>
+            <tr>
+                <td>Đề xuất ý tưởng/cải tạo</td>
+                <td>S4-S1</td>
+                <td>Đóng góp ý tưởng, cải tạo tối ưu trong quá trình làm việc</td>
+                <td>5</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Tối ưu quy trình/rút ngắn thời gian</td>
+                <td>S4-S2</td>
+                <td>Chủ động thí điểm, thử nghiệm giúp ngắn thời gian</td>
+                <td>10</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Không áp dụng cái mới</td>
+                <td>S4-S3</td>
+                <td>Không chịu thah đổi, cập nhật công nghệ mới</td>
+                <td>-10</td>
+                <td>25%</td>
+                <td>Nhận thông tin qua các hình thức trao đổi</td>
+            </tr>
+            <tr>
+                <td>Tham gia đào tạo (Giảng viên)</td>
+                <td>S4-S4</td>
+                <td>Đào tạo trực tiếp, online, Elearning, kèm cặp chỉ dẫn,..</td>
+                <td>5</td>
+                <td>25%</td>
+                <td>Thống kê tuần, tháng</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
